@@ -6,7 +6,7 @@ A Flutter application that transforms websites into mobile apps with customizabl
 - **Instant Web to App Conversion**: Enter any website URL and transform it into a native-looking mobile app.
 - **Customizable App Name**: Personalize your app with a custom name.
 - **Status Bar Customization**: Change the color and appearance of the status bar to match your brand.
-- **Navigation Bar Styling**: Modify the navigation bar color for a seamless user experience.
+- **Navigation Bar Styling**: Modify the navigation bar color for a seamless user experience using color code hash values.
 - **Responsive Design**: Works perfectly across different screen sizes and orientations.
 - **Cross-Platform Support**: Compatible with both Android and iOS devices.
 
@@ -43,20 +43,11 @@ flutter run
 5. Click "Generate App" to create your web-to-app conversion.
 6. Export or share your newly created app.
 
-## Status Bar and Navigation Bar Customization
-The app allows you to easily customize the appearance of the status bar and navigation bar using the following methods:
-
-### Using SystemChrome
-```dart
-SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  statusBarColor: Colors.blue, // Change status bar color
-  statusBarIconBrightness: Brightness.light, // Change status bar icons color
-  systemNavigationBarColor: Colors.blue, // Change navigation bar color
-));
-```
-
 ## Screenshots
-(Add your app screenshots here)
+Here are some screenshots of the app:
+
+![App Screenshot 1](assets/ok1.jpg)
+![App Screenshot 2](assets/ok2.jpg)
 
 ## Requirements
 - **Flutter SDK**: 3.0.0 or higher
