@@ -43,11 +43,18 @@ flutter run
 5. Click "Generate App" to create your web-to-app conversion.
 6. Export or share your newly created app.
 
-## Screenshots
+<!-- ## Screenshots
 Here are some screenshots of the app:
 
 ![App Screenshot 1](assets/ok1.jpg)
-![App Screenshot 2](assets/ok2.jpg)
+![App Screenshot 2](assets/ok2.jpg) -->
+
+## Screenshots
+
+<div style="display: flex; justify-content: space-around;">
+  <img src="assets/ok1.jpg" width="200" />
+  <img src="assets/ok2.jpg" width="200" />
+  </div>
 
 ## Requirements
 - **Flutter SDK**: 3.0.0 or higher
