@@ -1,85 +1,88 @@
-WebToApp Converter
+# WebToApp Converter
+
 A Flutter application that transforms websites into mobile apps with customizable features. Simply enter your web address and app name to create a fully functional mobile application.
 
-Features
-Instant Web to App Conversion: Enter any website URL and transform it into a native-looking mobile app
+## Features
+- **Instant Web to App Conversion**: Enter any website URL and transform it into a native-looking mobile app.
+- **Customizable App Name**: Personalize your app with a custom name.
+- **Status Bar Customization**: Change the color and appearance of the status bar to match your brand.
+- **Navigation Bar Styling**: Modify the navigation bar color for a seamless user experience.
+- **Responsive Design**: Works perfectly across different screen sizes and orientations.
+- **Cross-Platform Support**: Compatible with both Android and iOS devices.
 
-Customizable App Name: Personalize your app with a custom name
+## Installation
 
-Status Bar Customization: Change the color and appearance of the status bar to match your brand
+### Prerequisites
+Ensure you have Flutter installed on your machine.
 
-Navigation Bar Styling: Modify the navigation bar color for a seamless user experience
-
-Responsive Design: Works perfectly across different screen sizes and orientations
-
-Cross-Platform Support: Compatible with both Android and iOS devices
-
-Installation
-Ensure you have Flutter installed on your machine
-
-Clone this repository
-
-text
+### Clone this repository
+```sh
 git clone https://github.com/Rian445/web-to-app.git
-Navigate to the project directory
+```
 
-text
+### Navigate to the project directory
+```sh
 cd webtoapp
-Install dependencies
+```
 
-text
+### Install dependencies
+```sh
 flutter pub get
-Run the app
+```
 
-text
+### Run the app
+```sh
 flutter run
-Usage
-Launch the app
+```
 
-Enter your desired website URL in the input field
+## Usage
+1. Launch the app.
+2. Enter your desired website URL in the input field.
+3. Provide a name for your app.
+4. Customize the status bar and navigation bar colors using the color picker.
+5. Click "Generate App" to create your web-to-app conversion.
+6. Export or share your newly created app.
 
-Provide a name for your app
-
-Customize the status bar and navigation bar colors using the color picker
-
-Click "Generate App" to create your web-to-app conversion
-
-Export or share your newly created app
-
-Status Bar and Navigation Bar Customization
+## Status Bar and Navigation Bar Customization
 The app allows you to easily customize the appearance of the status bar and navigation bar using the following methods:
 
-Using SystemChrome
-text
+### Using SystemChrome
+```dart
 SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   statusBarColor: Colors.blue, // Change status bar color
   statusBarIconBrightness: Brightness.light, // Change status bar icons color
   systemNavigationBarColor: Colors.blue, // Change navigation bar color
 ));
-Screenshots
-App Home Screen
-URL Input
-Color Customization
-Final App
+```
 
-Requirements
-Flutter SDK: 3.0.0 or higher
+## Screenshots
+(Add your app screenshots here)
 
-Dart: 2.17.0 or higher
+## Requirements
+- **Flutter SDK**: 3.0.0 or higher
+- **Dart**: 2.17.0 or higher
+- **Android**: API 21+ (Android 5.0+)
+- **iOS**: 11.0+
 
-Android: API 21+ (Android 5.0+)
-
-iOS: 11.0+
-
-Contributing
+## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-Fork the repository
+### Steps to contribute:
+1. Fork the repository.
+2. Create your feature branch:
+   ```sh
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes:
+   ```sh
+   git commit -m 'Add some amazing feature'
+   ```
+4. Push to the branch:
+   ```sh
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request.
 
-Create your feature branch (git checkout -b feature/amazing-feature)
+---
+Feel free to reach out if you have any issues or feature requests!
 
-Commit your changes (git commit -m 'Add some amazing feature')
-
-Push to the branch (git push origin feature/amazing-feature)
-
-Open a Pull Request
