@@ -3,20 +3,27 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:http/http.dart' as http; // Add this import
+import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class WebViewScreen extends StatefulWidget {
   final String url;
+  final String appName;
+  final Color appBarColor; // Add appBarColor parameter
 
-  const WebViewScreen({super.key, required this.url});
+  const WebViewScreen({
+    super.key,
+    required this.url,
+    required this.appName,
+    required this.appBarColor, // Add appBarColor parameter
+  });
 
   @override
   State<WebViewScreen> createState() => _WebViewScreenState();
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
-  late final WebViewController controller;
+  late WebViewController controller;
   bool isPDFView = false;
   bool isHomePage = true;
   bool isLoading = true;
@@ -62,8 +69,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   void _checkIfHomePage(String url) {
     if (mounted) {
       setState(() {
-        isHomePage = url == 'https://portfolio-rian-islams-projects.vercel.app/' ||
-                    url == 'https://portfolio-rian-islams-projects.vercel.app';
+        isHomePage = url == widget.url;
       });
     }
   }
@@ -107,16 +113,8 @@ class _WebViewScreenState extends State<WebViewScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeController();
-    _checkConnectivity();
-    Connectivity().onConnectivityChanged.listen((result) {
-      setState(() {
-        isOffline = result == ConnectivityResult.none;
-      });
-    });
-  }
 
-  void _initializeController() {
+    // Initialize the controller directly in initState
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..enableZoom(true)
@@ -182,6 +180,13 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ),
       );
 
+    _checkConnectivity();
+    Connectivity().onConnectivityChanged.listen((result) {
+      setState(() {
+        isOffline = result == ConnectivityResult.none;
+      });
+    });
+
     if (isOffline) {
       _loadCachedPage();
     } else {
@@ -208,22 +213,25 @@ class _WebViewScreenState extends State<WebViewScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Rian's Portfolio",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+          title: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  widget.appName,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(width: 8),
-              Icon(Icons.rocket_launch, color: Colors.white),
-            ],
+                SizedBox(width: 8),
+                Icon(Icons.rocket_launch, color: Colors.white),
+              ],
+            ),
           ),
           centerTitle: true,
-          backgroundColor: Color.fromRGBO(17, 19, 49, 1),
+          backgroundColor: widget.appBarColor, // Use user-provided color
           toolbarHeight: 40,
         ),
         body: SafeArea(
@@ -240,58 +248,60 @@ class _WebViewScreenState extends State<WebViewScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: !isHomePage ? Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          margin: EdgeInsets.only(bottom: isPDFView ? 30 : 20),
-          height: 45,
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(17, 19, 49, 0.9),
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 22),
-                onPressed: () async {
-                  if (isPDFView) {
-                    setState(() {
-                      isPDFView = false;
-                    });
-                    if (await controller.canGoBack()) {
-                      controller.goBack();
-                    }
-                  } else if (await controller.canGoBack()) {
-                    controller.goBack();
-                  }
-                },
-              ),
-              Container(
-                height: 25,
-                width: 1,
-                color: Colors.white.withOpacity(0.3),
-              ),
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white, size: 22),
-                onPressed: () {
-                  setState(() {
-                    isPDFView = false;
-                  });
-                  controller.loadRequest(Uri.parse('https://portfolio-rian-islams-projects.vercel.app/'));
-                },
-              ),
-            ],
-          ),
-        ) : null,
+        floatingActionButton: !isHomePage
+            ? Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                margin: EdgeInsets.only(bottom: isPDFView ? 30 : 20),
+                height: 45,
+                decoration: BoxDecoration(
+                  color: widget.appBarColor.withOpacity(0.9), // Match app bar color
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 22),
+                      onPressed: () async {
+                        if (isPDFView) {
+                          setState(() {
+                            isPDFView = false;
+                          });
+                          if (await controller.canGoBack()) {
+                            controller.goBack();
+                          }
+                        } else if (await controller.canGoBack()) {
+                          controller.goBack();
+                        }
+                      },
+                    ),
+                    Container(
+                      height: 25,
+                      width: 1,
+                      color: Colors.white.withOpacity(0.3),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.home, color: Colors.white, size: 22),
+                      onPressed: () {
+                        setState(() {
+                          isPDFView = false;
+                        });
+                        controller.loadRequest(Uri.parse(widget.url));
+                      },
+                    ),
+                  ],
+                ),
+              )
+            : null,
       ),
     );
   }
